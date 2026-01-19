@@ -15,7 +15,7 @@ cat > ~/.terraform.d/credentials.tfrc.json <<EOF
 {
   "credentials": {
     "app.terraform.io": {
-      "token": "${TFC_API_TOKEN}"
+      "token": "${TFC_TOKEN}"
     }
   }
 }
