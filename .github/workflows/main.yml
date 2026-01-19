@@ -11,12 +11,7 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
-      - name: Set up Terraform Cloud credentials
-        env:
-          TFC_TOKEN: ${{ secrets.TFC_API_TOKEN }}
-        run: |
-          chmod +x ./scripts/setup-tfc-credentials.sh
-          ./scripts/setup-tfc-credentials.sh
+
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
         with:
@@ -24,13 +19,15 @@ jobs:
 
       - name: Terraform Init
         run: terraform init
-
+        env:
+          TFE_TOKEN: ${{ secrets.TFC_API_TOKEN }}
+          
       - name: Terraform Plan
         env:
-          TFC_TOKEN: ${{ secrets.TFC_API_TOKEN }}
+          TFE_TOKEN: ${{ secrets.TFC_API_TOKEN }}
         run: terraform plan
 
       - name: Terraform Apply
         run: terraform apply -auto-approve
         env:
-          TFC_TOKEN: ${{ secrets.TFC_API_TOKEN }}
+          TFE_TOKEN: ${{ secrets.TFC_API_TOKEN }}
