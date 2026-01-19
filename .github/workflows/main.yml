@@ -29,4 +29,3 @@ jobs:
         run: terraform apply -auto-approve
         env:
           TFC_TOKEN: ${{ secrets.TFC_API_TOKEN }}
-        run: terraform apply -auto-approve
