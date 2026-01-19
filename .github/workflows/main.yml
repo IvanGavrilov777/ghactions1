@@ -1,0 +1,32 @@
+name: Terraform Cloud Deploy
+
+on:
+  pull_request:
+    branches:
+      - main
+jobs:
+  terraform:
+    name: Terraform Cloud Plan & Apply
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.14.0
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Plan
+        env:
+          TFC_TOKEN: ${{ secrets.TFC_API_TOKEN }}
+        run: terraform plan
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
+        env:
+          TFC_TOKEN: ${{ secrets.TFC_API_TOKEN }}
+        run: terraform apply -auto-approve
