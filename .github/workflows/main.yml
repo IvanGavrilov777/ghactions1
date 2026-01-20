@@ -28,11 +28,6 @@ jobs:
         run: terraform init
         env:
           TFE_TOKEN: ${{ secrets.TFC_API_TOKEN }}
-          
-      - name: Terraform Plan
-        env:
-          TFE_TOKEN: ${{ secrets.TFC_API_TOKEN }}
-        run: terraform plan
 
       - name: Terraform Apply
         run: terraform apply -auto-approve
